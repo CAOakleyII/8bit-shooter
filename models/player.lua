@@ -14,6 +14,7 @@ function Player:new(name, pos, camera)
     player.img = love.graphics.newImage('assets/warlock.png')
     player.body = love.physics.newBody(entity_system.world, pos.x, pos.y, 'dynamic')
     player.body:setMass(10)
+    player.body:setFixedRotation(true)
     player.shape = love.physics.newRectangleShape(player.img:getWidth(), player.img:getHeight())
     player.fixture = love.physics.newFixture(player.body, player.shape)
     player.fixture:setRestitution(0.0)
@@ -138,7 +139,7 @@ function Player:draw()
   
   -- set Color needs to be set back to white, to draw an image.
   love.graphics.setColor(255,255,255)
-  love.graphics.draw(self.img, self.body:getX(), self.body:getY(), 0, self.orientation, 1, self.x_offset, self.img:getHeight())
+  love.graphics.draw(self.img, self.body:getX(), self.body:getY() + self.y_offset, 0, self.orientation, 1, self.x_offset, self.img:getHeight())
   love.graphics.polygon('line', self.body:getWorldPoints(self.shape:getPoints()))
 end
 
